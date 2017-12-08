@@ -1,0 +1,7 @@
+function [S] = signature(I,X,Y)
+    precision=10;
+    angle=2*pi/precision;
+    for i=0:precision
+        S(i)
+    end
+end
