@@ -1,8 +1,10 @@
-function [S] = signature(I,xb,yb)
-    precision=10;
+function [S, X, Y] = signature(I,xb,yb, p)
+    precision=p;
     unitAngle=2*pi/precision;
-    S=zeros(precision);
-    for i=0:precision-1
-        S(i)=distCentre(I,xb,yb,unitAngle*i);
+    S=zeros(precision,1);
+    X=zeros(precision,1);
+    Y=zeros(precision,1);
+    for i=1:precision
+        [S(i), X(i), Y(i)]=distCentre(I,xb,yb,unitAngle*i);
     end
 end
