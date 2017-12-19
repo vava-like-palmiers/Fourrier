@@ -1,10 +1,9 @@
 
     img = imread('dbq/apple-1.gif');
-    [xb,yb] = baricentre(img);
     
-    [S, X, Y] = signature(img, xb, yb,50);
+    [S, X, Y] = signature(img,50);
     
-    M=[Y X]
+    M=[Y X];
     img = insertMarker(img, M);
     
     pos = [xb yb];

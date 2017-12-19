@@ -19,8 +19,7 @@ for im = 1:numel(img_db_list);
     label_db{im} = get_label(img_db_list{im});
     
     %calcul descripteur 
-    [xb, yb] = baricentre(img_db{im});
-    [S, X, Y] = signature(img_db{im}, xb, yb, precision);
+    [S, X, Y] = signature(img_db{im}, precision);
     Desc = normaliseSignature(premiersCoeffs, S);
     
     D = norm(Desc-DescImReq);

@@ -17,7 +17,7 @@ im = 1;
     
     %calcul descripteur 
     [xb, yb] = baricentre(img_db{im});
-    [S, X, Y] = signature(img_db{im}, xb, yb, precision);
+    [S, X, Y] = signature(img_db{im}, precision);
     Desc = normaliseSignature(premiersCoeffs, S);
     
     [recall, precision] = tests(Desc, precision, premiersCoeffs);  
