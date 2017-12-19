@@ -1,9 +1,13 @@
 function [N] = normaliseSignature(premiersCoeffs, Coord)
 
-A = ttf(Coord);
+A = fft(Coord);
 
 A = abs(A)/abs(A(1));
 
-N = A(1:premiersCoeffs);
+if premiersCoeffs>=size(A)
+    N = A;
+else
+    N = A(1:premiersCoeffs);
+end
 
 end

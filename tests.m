@@ -2,16 +2,16 @@
 % où num_ref est le nombre d'objets de référence (le nombre d'images requêtes) 
 % et 19 est le nombre d'images à retrouver pour chaque requête
 
-function [recall, precision] = tests(descImReq, precision, premiersCoeffs)
+function [recall, precision] = tests(DescImReq, precision, premiersCoeffs)
 
 img_db_path = './db/';
 img_db_list = glob([img_db_path, '*.gif']);
 img_db = cell(1);
 label_db = cell(1);
 fd_db = cell(1);
-figure();
+%figure();
 
-liste_dist_eucl = zero(19,1);
+%mapObj = containers.Map('KeyType','char','ValueType','double');
 
 for im = 1:numel(img_db_list);
     
@@ -23,7 +23,7 @@ for im = 1:numel(img_db_list);
     [S, X, Y] = signature(img_db{im}, xb, yb, precision);
     Desc = normaliseSignature(premiersCoeffs, S);
     
-    
+    D = norm(Desc-DescImReq);
     
     %clf;imshow(img_db{im});
     %disp(label_db{im}); 
