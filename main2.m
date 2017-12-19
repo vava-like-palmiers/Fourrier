@@ -1,26 +1,24 @@
 precision = 10;
 premiersCoeffs = 12;
 
-img_db_path = './dbq/';
-img_db_list = glob([img_db_path, '*.gif']);
-img_db = cell(1);
-label_db = cell(1);
-fd_db = cell(1);
-%figure();
-%for im = 1:numel(img_db_list);
-    
+[im_db, label_db] = tests('./db/');
+[im_dbq, label_dbq] = tests('./dbq/');
+
 im = 1;
-    img_db{im} = logical(imread(img_db_list{im}));
-    label_db{im} = get_label(img_db_list{im});
-    
-    %calculer descripteur image actu
-    
-    %calcul descripteur 
-    [xb, yb] = baricentre(img_db{im});
-    [S, X, Y] = signature(img_db{im}, xb, yb, precision);
+
+    %calcul descripteur im dbq
+    [xb, yb] = baricentre(img_dbq{im});
+    [S, X, Y] = signature(img_dbq{im}, xb, yb, precision);
     Desc = normaliseSignature(premiersCoeffs, S);
     
-    [recall, precision] = tests(Desc, precision, premiersCoeffs);  
+   %parcours des images db
+   for i = 1:numel(im_db)
+       %calcul descripteur images db
+      [xb_q, yb_q] = baricentre(img_db{i});
+      [S_q, X_q, Y_q] = signature(img_db{i}, xb_q, yb_q, precision);
+      Desc = normaliseSignature(premiersCoeffs, S_q);
+   end
+   
+   
+ 
     
-    
-%end
