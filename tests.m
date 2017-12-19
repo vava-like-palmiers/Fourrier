@@ -14,6 +14,7 @@ for im = 1:numel(img_db_list);
     
     img_db{im} = logical(imread(img_db_list{im}));
     label_db{im} = get_label(img_db_list{im});
+
 end
     
 end

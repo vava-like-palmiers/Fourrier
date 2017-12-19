@@ -1,6 +1,6 @@
-function [N] = normaliseSignature(premiersCoeffs, Coord)
+function [N] = normaliseSignature(premiersCoeffs, Sign)
 
-A = fft(Coord);
+A = fft(Sign);
 
 A = abs(A)/abs(A(1));
 
