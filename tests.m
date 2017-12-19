@@ -8,7 +8,6 @@ img_db_path = path;
 img_db_list = glob([img_db_path, '*.gif']);
 img_db = cell(1);
 label_db = cell(1);
-fd_db = cell(1);
 
 for im = 1:numel(img_db_list);
     
