@@ -10,12 +10,8 @@ function [d, a, b] = distCentre(I,xb,yb,angle)
         i=round(x);
         j=round(y);
         
-        if i>=size(I,2) || i<=0 || j>=size(I,1) || j<=0
-            return;
-        end
-        
-        if I(i,j)==0
-            d=pdist([yb,xb;i,j],'euclidean');
+        if i>=size(I,1) || i<=0 || j>=size(I,2) || j<=0 || I(i,j)==0
+            d=pdist([xb,yb;i,j],'euclidean');
             a=i;
             b=j;
             return;

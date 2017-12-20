@@ -9,7 +9,7 @@ function afficher (ImBase, data, Yrecall, Ymoy, precision)
     [xb,yb] = baricentre(ImBase);
     [S,X,Y] = signature(ImBase, precision);
 
-    ImBaseMarque= insertMarker(double(ImBase), [[xb;Y] [yb;X]]); 
+    ImBaseMarque= insertMarker(double(ImBase), [[yb;Y] [xb;X]]); 
 
     subplot(h, l, [4,6]);
     imshow(ImBaseMarque);
@@ -20,9 +20,9 @@ function afficher (ImBase, data, Yrecall, Ymoy, precision)
     end
     
     subplot(h, l, [13,15]);
-    plot(Yrecall);
+    plot(Yrecall(1:50)*100);
     
-    %subplot(h, l, [16,18]);
-    %plot(Ymoy);
+    subplot(h, l, [16,18]);
+    plot(Ymoy(1:50)*100);
 
 end

@@ -1,5 +1,5 @@
-precision = 200;
-premiersCoeffs = 50;
+precision = 150;
+premiersCoeffs = 150;
 
 %chargement base de donnée
 
@@ -11,27 +11,38 @@ disp('loading database dbq...')
 
 [im_dbq, label_dbq] = tests('./dbq/');
 
-disp('loading complete')
+disp('loading descriptor calcul');
 
+sizeDB=numel(im_db);
+sizeDBQ=numel(im_dbq);
+DescReq=cell(1);
+totRecall = zeros(sizeDB,1);
 
-for im=1:numel(im_dbq)
-   distEuc=cell(1);
-   %calculer descripteur image actu
+%parcours des images db
+for i = 1:sizeDB
+    %calcul descripteur images db
+    DescReq{i} = descripteur(im_db{i}, premiersCoeffs, precision);
+end
+
+disp('loading complete');
+
+for im=1:sizeDBQ
    DescBase = descripteur(im_dbq{im}, premiersCoeffs, precision);
-   
+   distEuc=cell(1);
    %parcours des images db
-   for i = 1:numel(im_db)
+   for i = 1:sizeDB
        %calcul descripteur images db
-       DescReq = descripteur(im_db{i}, premiersCoeffs, precision);
-       distEuc{i} = norm(DescReq-DescBase);
+       distEuc{i} = norm(DescReq{i}-DescBase);
    end
    
    data = [label_db; im_db; distEuc];
    data=transpose(data);
    data = sortrows(data, 3);
+   actuRecall = recall(data,label_dbq{im});
    
-   Y = recall(data,label_dbq{im});
-   afficher (im_dbq{im}, data, Y, 0, precision);
+   totRecall = totRecall + actuRecall;
+   
+   afficher (im_dbq{im}, data, actuRecall, totRecall/i, precision);
    
    uiwait;
 end
