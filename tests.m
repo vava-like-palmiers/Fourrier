@@ -9,7 +9,7 @@ img_db_list = glob([img_db_path, '*.gif']);
 img_db = cell(1);
 label_db = cell(1);
 
-for im = 1:numel(img_db_list);
+for im = 1:50;%numel(img_db_list);
     
     img_db{im} = logical(imread(img_db_list{im}));
     label_db{im} = get_label(img_db_list{im});

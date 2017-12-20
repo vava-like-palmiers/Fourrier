@@ -18,11 +18,12 @@ function afficher (ImBase, data, Yrecall, Ymoy, precision)
         subplot(h, l, i);
         imshow(data{i-l, 2});
     end
-    
-    subplot(h, l, [13,15]);
-    plot(Yrecall);
-    
-    %subplot(h, l, [16,18]);
-    %plot(Ymoy);
+
+ 
+%subplot(2, 2, 3);
+%image(imread('mon_image3.png'));
+ 
+%subplot(2, 2, 4);
+%image(imread('mon_image4.png'));
 
 end

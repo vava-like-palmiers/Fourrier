@@ -1,5 +1,5 @@
-precision = 10;
-premiersCoeffs = 12;
+precision = 200;
+premiersCoeffs = 50;
 
 %chargement base de donnée
 
@@ -13,9 +13,9 @@ disp('loading database dbq...')
 
 disp('loading complete')
 
-im = 1;
-distEuc=cell(1);
 
+for im=1:numel(im_dbq)
+   distEuc=cell(1);
    %calculer descripteur image actu
    DescBase = descripteur(im_dbq{im}, premiersCoeffs, precision);
    
@@ -26,10 +26,13 @@ distEuc=cell(1);
        distEuc{i} = norm(DescReq-DescBase);
    end
    
-   map = table(label_db, im_db, distEuc);
-   map = sortrows(map, 3);
+   data = [label_db; im_db; distEuc];
+   data=transpose(data);
+   data = sortrows(data, 3);
    
-   T1=map(1:5,:)
+   Y = recall(data,label_dbq{im});
+   afficher (im_dbq{im}, data, Y, 0, precision);
    
- 
+   uiwait;
+end
     

@@ -15,7 +15,7 @@ function [d, a, b] = distCentre(I,xb,yb,angle)
         end
         
         if I(i,j)==0
-            d=pdist([xb,yb;i,j],'euclidean');
+            d=pdist([yb,xb;i,j],'euclidean');
             a=i;
             b=j;
             return;
