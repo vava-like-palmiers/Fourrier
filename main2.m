@@ -1,4 +1,4 @@
-precision = 150;
+precision = 150; % attention: la précision indique le nombre de points qu'on évalue sur les images.
 premiersCoeffs = 150;
 
 %chargement base de donnée
@@ -11,7 +11,7 @@ disp('loading database dbq...')
 
 [im_dbq, label_dbq] = tests('./dbq/');
 
-disp('loading descriptor calcul');
+disp('calculating descriptors ...');
 
 sizeDB=numel(im_db);
 sizeDBQ=numel(im_dbq);
@@ -24,11 +24,12 @@ for i = 1:sizeDB
     DescReq{i} = descripteur(im_db{i}, premiersCoeffs, precision);
 end
 
-disp('loading complete');
+disp('Calculating Euclidean Distances for:');
 
 for im=1:sizeDBQ
    DescBase = descripteur(im_dbq{im}, premiersCoeffs, precision);
    distEuc=cell(1);
+   disp(label_dbq{im});
    %parcours des images db
    for i = 1:sizeDB
        %calcul descripteur images db
@@ -42,7 +43,7 @@ for im=1:sizeDBQ
    
    totRecall = totRecall + actuRecall;
    
-   afficher (im_dbq{im}, data, actuRecall, totRecall/i, precision);
+   afficher (im_dbq{im}, data, actuRecall, totRecall/im, precision);
    
    uiwait;
 end

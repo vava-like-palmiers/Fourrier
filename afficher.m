@@ -5,6 +5,7 @@ function afficher (ImBase, data, Yrecall, Ymoy, precision)
 
     subplot(h, l, [1,3]);
     imshow(ImBase);
+    title('Image Requete');
 
     [xb,yb] = baricentre(ImBase);
     [S,X,Y] = signature(ImBase, precision);
@@ -13,16 +14,22 @@ function afficher (ImBase, data, Yrecall, Ymoy, precision)
 
     subplot(h, l, [4,6]);
     imshow(ImBaseMarque);
+    title('Baricentre + Signature');
     
     for i=l+1:2*l
         subplot(h, l, i);
         imshow(data{i-l, 2});
+        title(data{i-l,1});
     end
     
     subplot(h, l, [13,15]);
-    plot(Yrecall(1:50)*100);
+    plot(Yrecall*100);
+    xlim([0 19]);
+    title('Courbe Recall');
     
     subplot(h, l, [16,18]);
-    plot(Ymoy(1:50)*100);
+    plot(Ymoy*100);
+    xlim([0 19]);
+    title('Courbe Moyenne');
 
 end
